@@ -1,0 +1,16 @@
+version: 3
+
+includes:
+  argo: './Taskfile.argo.yaml'
+  kind: './Taskfile.kind.yaml'
+
+tasks:
+  kind-up:
+    desc: Bring up the platform with kind
+    cmds:
+      - task: kind:platform-up
+      - task: argo:bootstrap
+  kind-down:
+    desc: Bring down the platform if spun up with kind
+    cmds:
+      - task: kind:platform-down

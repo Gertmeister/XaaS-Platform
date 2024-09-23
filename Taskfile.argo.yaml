@@ -1,0 +1,29 @@
+version: 3
+
+tasks:
+  bootstrap:
+    dir: 'argo'
+    desc: Install argo cd on cluster
+    cmds:
+      - task: create-ns
+      - task: install
+      - task: restrict-default-proj
+
+  create-ns:
+    dir: 'argo'
+    desc: Create namespace for argocd
+    cmds: 
+      - kubectl apply -f argocd-ns.yaml
+    
+  install:
+    dir: 'argo'
+    desc: Install argocd helm chart
+    cmds:
+      - helm repo add argo https://argoproj.github.io/argo-helm
+      - helm install argocd argo/argo-cd -n argocd
+  
+  restrict-default-proj:
+    dir: 'argo'
+    desc: Restrict what is possible with the default ArgoCD AppProject
+    cmds: 
+      - ./restrict_default_appproject.sh

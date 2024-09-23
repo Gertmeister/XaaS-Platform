@@ -1,0 +1,13 @@
+version: 3
+
+tasks:
+  platform-up: 
+    dir: 'kind'
+    desc: Spin up platform cluster in Kind
+    cmds:
+      - kind create cluster --config platform.yaml 
+  platform-down:
+    dir: 'kind'
+    desc: Spin down platform cluster in Kind
+    cmds:
+      - kind delete cluster -n xaas-platform
